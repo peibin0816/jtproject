@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/jt/jt.iml" filepath="$PROJECT_DIR$/jt/jt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jt/jt_common/jt_common.iml" filepath="$PROJECT_DIR$/jt/jt_common/jt_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jt/jt_manage/jt_manage.iml" filepath="$PROJECT_DIR$/jt/jt_manage/jt_manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/jtproject.iml" filepath="$PROJECT_DIR$/.idea/jtproject.iml" />
+    </modules>
+  </component>
+</project>
