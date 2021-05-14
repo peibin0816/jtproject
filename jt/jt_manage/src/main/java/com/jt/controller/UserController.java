@@ -21,10 +21,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/hello")
-    public List<User> hello(){
+    @GetMapping("/getUserList")
+    public SysResult getUserList(){
 
-        return userService.findAll();
+        List<User> all = userService.findAll();
+        if(all!=null) return SysResult.success("用户列表获取成功",all);
+        else return SysResult.fail();
     }
     /**
      * 1.url地址：、user/login

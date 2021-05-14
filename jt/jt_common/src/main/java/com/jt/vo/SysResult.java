@@ -29,7 +29,7 @@ public class SysResult extends BasePojo {
     }
 
     public static SysResult success(String msg,Object data){
-            return new SysResult(200,msg,null);
+            return new SysResult(200,msg,data);
     }
 
 }

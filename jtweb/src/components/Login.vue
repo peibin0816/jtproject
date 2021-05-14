@@ -13,10 +13,10 @@
             <el-input prefix-icon="iconfont iconuser" placeholder="用户名" v-model="loginForm.username"></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input  prefix-icon="iconfont iconsuo" placeholder="密码" v-model="loginForm.password" type="password" ></el-input>
+            <el-input prefix-icon="iconfont iconsuo" placeholder="密码" v-model="loginForm.password" type="password" ></el-input>
           </el-form-item>
           <el-form-item class="btns">
-              <el-button type="primary" @click="login">登录</el-button>
+              <el-button type="primary" @keyup.enter="keyDown" @click="login">登录</el-button>
               <el-button type="info" @click="resetBtn">重置</el-button>
           </el-form-item>
         </el-form>
@@ -28,7 +28,6 @@
 <script>
 export default {
   data(){
-
     return{
       loginForm:{
         username:'',
@@ -58,17 +57,29 @@ export default {
 
         //发起ajax请求
         const {data:result} = await this.$http.post('/user/login',this.loginForm)
-        if(result.status == "200" ){
-          this.$message.success("登录成功");
-        }
-        else{
-          this.$message.error("登陆失败");
-        }
-
+        if(result.status !== 200 )
+          return this.$message.error("用户名或密码错误!");
+        this.$message.success("登陆成功");
+        let token = result.data
+        window.sessionStorage.setItem('token',token)
+        this.$router.push('/home')
       })
 
+    },
+    keyDown(e){
+      if(e.keyCode==13){
+        this.login()
+      }
     }
-  }
+  },
+  mounted () {
+          //绑定事件
+          window.addEventListener('keydown',this.keyDown);
+  },
+  //销毁事件
+  destroyed(){
+    window.removeEventListener('keydown',this.keyDown,false);
+  }     
 }
 </script>
 

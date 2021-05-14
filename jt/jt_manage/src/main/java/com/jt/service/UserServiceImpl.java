@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author 刘昱江
@@ -28,13 +29,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String findUserByUP(User user) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper();
-        queryWrapper.eq("username",user.getUsername());
-        User user1 = userMapper.selectOne(queryWrapper);
-        if(user1==null || user.getPassword()==null) return null;
+
         String reqPwd = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
-        if(StringUtils.pathEquals(user1.getPassword(),reqPwd))
-            return DigestUtils.md5DigestAsHex("success".getBytes());
-        return null;
+        user.setPassword(reqPwd);
+        QueryWrapper<User> queryWrapper = new QueryWrapper(user);
+        User userDB = userMapper.selectOne(queryWrapper);
+        return userDB==null?null: UUID.randomUUID().toString().replace("-","");
     }
 }
