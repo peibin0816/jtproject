@@ -36,22 +36,19 @@
 
 <script>
 export default {
-  created() {
+  created () {
     this.getUserList()
-    },
-  data(){
-    return{
+  },
+  data () {
+    return {
       userList: []
     }
   },
-  methods:{
-     async getUserList(){
-       const {data:result} = await this.$http.get('/user/getUserList')
-       if(result.status==200)
-         this.userList = result.data
-        else return this.$message.error("获取用户列表错误")
-
-     }
+  methods: {
+    async getUserList () {
+      const { data: result } = await this.$http.get('/user/getUserList')
+      if (result.status == 200) { this.userList = result.data } else return this.$message.error('获取用户列表错误')
+    }
   }
 }
 </script>

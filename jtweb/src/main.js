@@ -12,6 +12,8 @@ axios.defaults.baseURL = 'http://localhost:8091/'
 /* 向vue对象中添加全局对象 以后发送ajax请求使用$http对象 */
 Vue.prototype.$http = axios
 
+
+
 Vue.config.productionTip = false
 
 new Vue({

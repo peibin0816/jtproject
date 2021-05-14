@@ -49,56 +49,53 @@
 </template>
 
 <script>
-  export default {
-    //初始化函数
-    created() {
-      this.getMenuList()
-      //设定模式选中按钮
-      this.defaultActive = window.sessionStorage.getItem("activeMenu")
+export default {
+  // 初始化函数
+  created () {
+    this.getMenuList()
+    // 设定模式选中按钮
+    this.defaultActive = window.sessionStorage.getItem('activeMenu')
+  },
+  data () {
+    return {
+      menuList: [],
+      menuIcon: {
+        1: 'iconfont iconuser',
+        3: 'iconfont iconshangpin',
+        5: 'iconfont iconicon--copy',
+        7: 'iconfont iconquanxian',
+        8: 'iconfont iconziyuan'
+      },
+      // 定义是否折叠
+      isCollapse: false,
+      // 是否展现折叠动态效果
+      isCollapseTransition: false,
+      // 定义默认高亮
+      defaultActive: ''
+    }
+  },
+  methods: {
+    logout () {
+      // 1.删除session中的记录
+      window.sessionStorage.clear()
+      // 2.跳转到登陆界面
+      this.$router.push('/login')
     },
-    data() {
-      return {
-        menuList: [],
-        menuIcon: {
-          '1': 'iconfont iconuser',
-          '3': 'iconfont iconshangpin',
-          '5': 'iconfont iconicon--copy',
-          '7': 'iconfont iconquanxian',
-          '8': 'iconfont iconziyuan'
-        },
-        //定义是否折叠
-        isCollapse: false,
-        //是否展现折叠动态效果
-        isCollapseTransition: false,
-        //定义默认高亮
-        defaultActive: ''
-      }
+    async getMenuList () {
+      const { data: result } = await this.$http.get('/rights/getRightsList')
+      if (result.status == 200) { this.menuList = result.data } else return this.$message.error('获取菜单列表错误')
     },
-    methods: {
-      logout() {
-        //1.删除session中的记录
-          window.sessionStorage.clear()
-          //2.跳转到登陆界面
-          this.$router.push('/login')
-      },
-      async getMenuList() {
-
-          const {data:result} = await this.$http.get('/rights/getRightsList')
-          if(result.status==200)
-            this.menuList = result.data
-           else return this.$message.error("获取菜单列表错误")
-      },
-      //设定左侧折叠展开效果
-      collspseClick() {
-        this.isCollapse = !this.isCollapse
-      },
-      defaultActiveMenu(activeMenu){
-        //为了实现返回之后的选中效果,应该将数据保存到第三方中sessionStory
-        window.sessionStorage.setItem("activeMenu",activeMenu)
-        this.defaultActive = activeMenu
-      }
+    // 设定左侧折叠展开效果
+    collspseClick () {
+      this.isCollapse = !this.isCollapse
+    },
+    defaultActiveMenu (activeMenu) {
+      // 为了实现返回之后的选中效果,应该将数据保存到第三方中sessionStory
+      window.sessionStorage.setItem('activeMenu', activeMenu)
+      this.defaultActive = activeMenu
     }
   }
+}
 </script>
 
 <!-- 防止样式重叠 -->

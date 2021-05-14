@@ -27,11 +27,11 @@
 <!-- 定义JS变量 -->
 <script>
 export default {
-  data(){
-    return{
-      loginForm:{
-        username:'',
-        password:''
+  data () {
+    return {
+      loginForm: {
+        username: '',
+        password: ''
       },
       rules: {
         username: [
@@ -44,42 +44,40 @@ export default {
       }
     }
   },
-  methods:{
-    resetBtn(){
+  methods: {
+    resetBtn () {
       // this.loginForm.username ='';
       // this.loginForm.password =''
       this.$refs.loginFormRef.resetFields()
     },
-    login(){
-      //要在登陆前校验
-      this.$refs.loginFormRef.validate(async valid =>{
-        if(!valid) return
+    login () {
+      // 要在登陆前校验
+      this.$refs.loginFormRef.validate(async valid => {
+        if (!valid) return
 
-        //发起ajax请求
-        const {data:result} = await this.$http.post('/user/login',this.loginForm)
-        if(result.status !== 200 )
-          return this.$message.error("用户名或密码错误!");
-        this.$message.success("登陆成功");
-        let token = result.data
-        window.sessionStorage.setItem('token',token)
+        // 发起ajax请求
+        const { data: result } = await this.$http.post('/user/login', this.loginForm)
+        if (result.status !== 200) { return this.$message.error('用户名或密码错误!') }
+        this.$message.success('登陆成功')
+        const token = result.data
+        window.sessionStorage.setItem('token', token)
         this.$router.push('/home')
       })
-
     },
-    keyDown(e){
-      if(e.keyCode==13){
+    keyDown (e) {
+      if (e.keyCode == 13) {
         this.login()
       }
     }
   },
   mounted () {
-          //绑定事件
-          window.addEventListener('keydown',this.keyDown);
+    // 绑定事件
+    window.addEventListener('keydown', this.keyDown)
   },
-  //销毁事件
-  destroyed(){
-    window.removeEventListener('keydown',this.keyDown,false);
-  }     
+  // 销毁事件
+  destroyed () {
+    window.removeEventListener('keydown', this.keyDown, false)
+  }
 }
 </script>
 
