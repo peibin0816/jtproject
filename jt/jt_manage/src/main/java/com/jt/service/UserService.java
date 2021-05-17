@@ -1,6 +1,7 @@
 package com.jt.service;
 
 import com.jt.pojo.User;
+import com.jt.vo.PageResult;
 
 import java.util.List;
 
@@ -11,4 +12,11 @@ import java.util.List;
 public interface UserService {
     List<User> findAll();
     String findUserByUP(User user);
+    PageResult findByQuery(PageResult pageResult);
+
+    Integer updateStatusById(Integer id, Boolean status);
+
+    Integer deleteUserById(Integer id);
+
+    Integer addUser(User user);
 }
