@@ -13,6 +13,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,11 +46,10 @@ public class UserServiceImpl implements UserService{
     public PageResult findByQuery(PageResult pageResult) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.like(StringUtils.hasLength(pageResult.getQuery()),"username",pageResult.getQuery());
-
+        queryWrapper.orderByAsc("username");
 //        System.out.printf(pageResult.getQuery());
         IPage<User> page  = new Page<>(pageResult.getPageNum(),pageResult.getPageSize());
         page= userMapper.selectPage(page,queryWrapper);
-
         pageResult.setRows(page.getRecords());
         pageResult.setTotal(page.getTotal());
         return pageResult;
@@ -68,7 +68,14 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Integer addUser(User user) {
+        String reqPwd = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
+        user.setPassword(reqPwd).setStatus(true);
         return userMapper.insert(user);
     }
 
+    @Override
+    public Integer updateUser(User user) {
+        int i = userMapper.updateById(user);
+        return i;
+    }
 }

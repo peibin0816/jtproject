@@ -22,7 +22,7 @@ public class RightsController {
     @GetMapping("/getRightsList")
     public SysResult getRightsList(){
         List<Rights> rights = rightsService.findall();
-        System.out.println(rights);
+        //System.out.println(rights);
         if(rights!=null) return SysResult.success("服务器调用成功",rights);
         else return SysResult.fail();
     }

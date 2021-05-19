@@ -54,6 +54,19 @@ public class UserController {
         return SysResult.fail();
     }
 
+    /**
+     * 1.url地址：、user/updateUser
+     * 2.请求的参数：表单对象Json串
+     * 3.返回值的结果SysResult
+     */
+    @PostMapping("/updateUser")
+    public SysResult updateUser(@RequestBody User user){
+        Integer res= userService.updateUser(user);
+        if(res>0)
+            return SysResult.success();
+        return SysResult.fail();
+    }
+
 
     /**
      * 更新status
@@ -68,6 +81,7 @@ public class UserController {
             return SysResult.success();
         return SysResult.fail();
     }
+
 
     /**
      * 删除
