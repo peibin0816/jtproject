@@ -20,7 +20,4 @@ public class ItemCatController {
         List<ItemCat> itemCatList = itemCatService.findItemCatList(type);
         return SysResult.success(itemCatList);
     }
-    public void test(){
-        
-    }
 }

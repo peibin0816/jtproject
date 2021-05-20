@@ -5,6 +5,8 @@ import Home from '../components/Home.vue'
 import Welcome from '../components/Welcome.vue'
 import User from '../components/user/User.vue'
 import ItemCat from '../components/item/ItemCat.vue'
+import Item from '../components/item/Item.vue'
+import AddItem from '../components/item/addItem.vue'
 
 Vue.use(VueRouter)
 const routes = [
@@ -14,7 +16,9 @@ const routes = [
     redirect: '/welcome', children:[
     {path: '/welcome', component: Welcome},
     {path: '/user', component: User},
-    {path: '/itemCat', component: ItemCat}
+    {path: '/itemCat', component: ItemCat},
+    {path: '/item', component: Item},
+    {path: '/item/addItem', component: AddItem}
   ]}
 ]
 
