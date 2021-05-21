@@ -7,6 +7,7 @@ import User from '../components/user/User.vue'
 import ItemCat from '../components/item/ItemCat.vue'
 import Item from '../components/item/Item.vue'
 import AddItem from '../components/item/addItem.vue'
+import ItemCatParam from '../components/item/ItemCatParam.vue'
 
 Vue.use(VueRouter)
 const routes = [
@@ -18,7 +19,8 @@ const routes = [
     {path: '/user', component: User},
     {path: '/itemCat', component: ItemCat},
     {path: '/item', component: Item},
-    {path: '/item/addItem', component: AddItem}
+    {path: '/item/addItem', component: AddItem},
+    {path: '/itemCatParam', component: ItemCatParam}
   ]}
 ]
 

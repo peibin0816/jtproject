@@ -20,4 +20,34 @@ public class ItemCatController {
         List<ItemCat> itemCatList = itemCatService.findItemCatList(type);
         return SysResult.success(itemCatList);
     }
+
+    @PutMapping("/status/{id}/{status}")
+    public SysResult updateStatus(@PathVariable Integer id,@PathVariable boolean status){
+        int res = itemCatService.updateStatus(id,status);
+        if(res>0) return SysResult.success();
+        else return SysResult.fail();
+    }
+
+    @PostMapping("/saveItemCat")
+    public SysResult saveItemCat(@RequestBody ItemCat itemCat){
+        int res = itemCatService.saveItemCat(itemCat);
+        if(res>0) return SysResult.success();
+        else return SysResult.fail();
+    }
+
+    @DeleteMapping("/deleteItemCat")
+    public SysResult deleteItemCat(ItemCat itemCat){
+        int res = itemCatService.deleteItemCat(itemCat);
+        if(res>0) return SysResult.success();
+        else return SysResult.fail();
+    }
+
+    @PutMapping("/updateItemCat")
+    public SysResult updateItemCat(@RequestBody ItemCat itemCat){
+        int res = itemCatService.updateItemCat(itemCat);
+        if(res>0) return SysResult.success();
+        else return SysResult.fail();
+    }
+
+
 }

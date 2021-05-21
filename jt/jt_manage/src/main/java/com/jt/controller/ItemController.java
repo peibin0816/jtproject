@@ -2,6 +2,7 @@ package com.jt.controller;
 
 import com.jt.pojo.Item;
 import com.jt.service.ItemService;
+import com.jt.vo.ItemVO;
 import com.jt.vo.PageResult;
 import com.jt.vo.SysResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,10 @@ public class ItemController {
         if(res>0) return SysResult.success();
         else return SysResult.fail();
     }
-    public SysResult sda(MultipartFile file){
-        file.
+
+    @PostMapping("/saveItem")
+    public SysResult saveItem(@RequestBody ItemVO itemVO){
+        itemService.saveitem(itemVO);
+        return SysResult.success();
     }
 }

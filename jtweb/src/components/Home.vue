@@ -41,10 +41,6 @@
       </el-aside>
       <!-- 定义主页面结构-->
       <el-main>
-        <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-          <!-- <el-breadcrumb-item v-for="menu in menuList" v-text="menu.name"></el-breadcrumb-item> -->
-        </el-breadcrumb>
         <!-- 定义路由展现页面-->
         <router-view></router-view>
       </el-main>
